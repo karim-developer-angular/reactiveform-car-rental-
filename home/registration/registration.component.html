@@ -1,0 +1,101 @@
+<div style="margin-left: 20%;">
+    <p-card header="Registration Form" [style]="{'width': '50rem', 'margin-bottom': '2em'}">
+        <form [formGroup]="SignupForm" (ngSubmit)="onSubmit(SignupForm)">
+           
+            <div formGroupName="userData">
+                <div >
+                    <div class="formgrid grid">
+                        <div class="field col">
+                            <label for="username">First Name</label>
+                            <input pInputText type="text" id="username" formControlName = "username"  autocomplete="off"
+                            oninput="this.value=this.value.replace(/[^A-Za-z\s]/g, '').replace(/^\s+/g, '')"
+                            class="form-control text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                            <span class="help-block" *ngIf="!SignupForm.get('userData.username').valid&&(SignupForm.get('userData.username').touched || isFormSubmitted)">
+                                <span class="p-error" *ngIf = "SignupForm.get('userData.username').errors['required']">field is required</span>
+                              </span>
+                        </div>
+                        <div class="field col">
+                            <label for="lastName">Last Name</label>
+                            <input id="lastName" pInputText type="text"formControlName = "lastName" autocomplete="off" class=" form-control text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                            <span class="help-block" *ngIf="!SignupForm.get('userData.lastName').valid&&(SignupForm.get('userData.lastName').touched || isFormSubmitted)">
+                                <span class="p-error" *ngIf = "SignupForm.get('userData.lastName').errors['required']">field is required</span>
+                              </span>
+                        </div>
+                    </div>
+                </div>
+                <div >
+                    <div class="formgrid grid">
+                        <div class="field col">
+                            <label for="mobileNumber">Mobile Number</label>
+                           
+                            <input id="mobileNumber" pInputNumber type="text" maxlength="10" pKeyFilter="int" formControlName = "mobileNumber"  autocomplete="off" autocomplete="off"
+                             class="form-control text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                             <span class="help-block" *ngIf="!SignupForm.get('userData.mobileNumber').valid&&(SignupForm.get('userData.mobileNumber').touched || isFormSubmitted)">
+                                <span class="p-error" *ngIf = "SignupForm.get('userData.mobileNumber').errors['required']">field is required</span>
+                                <span class="p-error" *ngIf = "SignupForm.get('userData.mobileNumber').errors['patters']">In valid Mobile Number</span>
+                              </span>
+                            </div>
+                        <div class="field col">
+                            <label for="email">Email</label>
+                            <input id="email" pInputText type="email" autocomplete="off"
+                            formControlName = "email" class="form-control text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                            <span class="help-block" *ngIf="!SignupForm.get('userData.email').valid&&(SignupForm.get('userData.email').touched || isFormSubmitted)">
+                                <span class="p-error" *ngIf = "SignupForm.get('userData.email').errors['required']">field is required</span>
+                              </span>
+                        </div>
+                    </div>
+                </div>
+                <div >
+                    <div class="formgrid grid">
+                        <div class="field col">
+                            <label for="aadharNumber">Aadhar Number</label>
+                           
+                            <input id="aadharNumber" pInputText type="text" maxlength="14" pKeyFilter="int" formControlName = "aadharNumber"  autocomplete="off"
+                            oninput="this.value = this.value.replace(/[^\d0-9]/g, '').replace(/(\d)\1{9}/g,'').replace(/(.{4})/g, '$1 ').trim()" 
+                            class="form-control text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                             <span class="help-block" *ngIf="!SignupForm.get('userData.aadharNumber').valid&&(SignupForm.get('userData.aadharNumber').touched || isFormSubmitted)">
+                                <span class="p-error" *ngIf = "SignupForm.get('userData.aadharNumber').errors['required']">field is required</span>
+                              </span>
+                            </div>
+                        <div class="field col">
+                            <label for="lienceId">Driving Licence ID</label>
+                            <input id="lienceId" pInputText type="text" autocomplete="off" maxlength="15"
+                            formControlName = "lienceId" class="form-control text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                            <span class="help-block" *ngIf="!SignupForm.get('userData.lienceId').valid&&(SignupForm.get('userData.lienceId').touched || isFormSubmitted)">
+                                <span class="p-error" *ngIf = "SignupForm.get('userData.lienceId').errors['required']">field is required</span>
+                              </span>
+                        </div>
+                    </div>
+                </div>
+             
+            <div class="radio" style="display:flex">
+                <div *ngFor="let gen of genders" style="margin-left: 5px;">
+                    <p-radioButton formControlName="gender" name="gender" [value]="gen" [inputId]="gen"></p-radioButton>
+                    <label for="{{gen}}">{{gen}}</label>
+                </div>
+               
+              
+            </div> 
+            <div >
+                <div class="field col-12">
+                    <label for="add">Address</label>
+                    <textarea id="add" type="text" formControlName="address" rows="4" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"></textarea>
+                </div>
+            </div>
+            </div>
+           
+    
+   <div style="margin-left:35%">
+    <span class="help-block p-error" *ngIf="!SignupForm.valid && (SignupForm.touched || isFormSubmitted)">
+        please enter valid data
+      </span>
+   </div>
+       
+        <div >
+            <p-button label="Submit" type="submit" icon="pi pi-check" styleClass="p-button-sm"></p-button>
+            <p-button label="Cancel" type="button" icon="pi pi-times"(click)="clearForm(SignupForm)" styleClass="p-button-secondary p-button-sm" [style]="{'margin-left': '.5em'}"></p-button>
+        </div>
+        
+    </form>
+    </p-card>
+</div>

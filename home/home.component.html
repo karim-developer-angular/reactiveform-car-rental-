@@ -1,0 +1,20 @@
+<div>
+    <p-carousel [value]="products" styleClass="custom-carousel" [numVisible]="1" [numScroll]="1" [circular]="true" [autoplayInterval]="3000" [responsiveOptions]="responsiveOptions">
+        <ng-template pTemplate="header">
+            <h1 style="margin-left: 35%;font-family: Palatino Linotype;"><i>Welcome To Top Rental Cars</i></h1>
+            <h3 style="margin-left: 70%;">self Driving</h3>
+        </ng-template>
+        <ng-template let-product pTemplate="item">
+            <div class="product-item">
+                <div class="product-item-content">
+                    <div class="mb-3" style="text-align:center">
+                        <img style="width: 65%; height:100%" src="assets/{{product.image}}" [alt]="product.name" class="product-image" />
+                    </div>
+                    <div>
+                        <!-- <h4 class="mb-1">{{product.name}}</h4> -->
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </p-carousel>
+</div>

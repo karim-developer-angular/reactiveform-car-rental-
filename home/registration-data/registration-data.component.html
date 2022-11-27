@@ -1,0 +1,25 @@
+
+<h1>Registration Data</h1>
+<p-table #dt [columns]="cols" *ngIf="registrationData.length > 0" [value]="registrationData" [tableStyle]="{'min-width': '50rem'}">
+   
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngFor="let col of columns">
+                <span style="text-transform: capitalize;">{{col.header}}</span>
+            </th>
+            <th>
+                Action
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr [pSelectableRow]="rowData">
+            <td *ngFor="let col of columns">
+                {{rowData[col.field]}}
+            </td>
+            <td>
+                <p-button label="Edit" type="submit" icon="pi pi-user-edit" styleClass="p-button-sm" (click)="editData(rowData)"></p-button>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
